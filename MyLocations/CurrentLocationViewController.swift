@@ -108,7 +108,6 @@ class CurrentLocationViewController: UIViewController {
         return line1 + " " + line2
         
     }
-
     
     func updateLabels () {
         
@@ -192,7 +191,24 @@ class CurrentLocationViewController: UIViewController {
                 updateLabels()
                 configureGetButton()
             }
+            
+        
+      }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "TagLocation" {
+            if let navigationController = segue.destinationViewController as? UINavigationController,
+                locationDetailsViewController = navigationController.viewControllers[0] as? LocationDetailsViewController {
+                
+                locationDetailsViewController.coordinate = location!.coordinate
+                locationDetailsViewController.placemark = placemark
+                
+            }
+        
         }
+
+    }
         
 }
     
